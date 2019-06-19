@@ -2,7 +2,6 @@ package io.github.manuelernesto.money.api.resource;
 
 import io.github.manuelernesto.money.api.model.Categoria;
 import io.github.manuelernesto.money.api.repository.CategoriaRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -43,7 +42,7 @@ public class CategoriaResource {
     @GetMapping("/{codigo}")
     public Categoria findByCode(@PathVariable Long codigo) {
         Optional<Categoria> result = categoriaRepository.findById(codigo);
-        return result.orElse(null);
+        return result.orElseThrow();
     }
 
 //    @GetMapping
