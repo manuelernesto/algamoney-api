@@ -1,14 +1,19 @@
 package io.github.manuelernesto.money.api.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
 @Table(name = "categoria")
 public class Categoria {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
+    @NotNull
+    @Size(min = 5, max = 50)
     private String nome;
 
     public Long getCodigo() {
