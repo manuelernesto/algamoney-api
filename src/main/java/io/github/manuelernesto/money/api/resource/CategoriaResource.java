@@ -1,14 +1,15 @@
 package io.github.manuelernesto.money.api.resource;
 
+import io.github.manuelernesto.money.api.event.RecursoCriadoEvento;
 import io.github.manuelernesto.money.api.model.Categoria;
 import io.github.manuelernesto.money.api.repository.CategoriaRepository;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +18,14 @@ import java.util.Optional;
 public class CategoriaResource {
 
     private final CategoriaRepository categoriaRepository;
+    private final ApplicationEventPublisher publisher;
 
-    public CategoriaResource(CategoriaRepository categoriaRepository) {
+    public CategoriaResource(
+            CategoriaRepository categoriaRepository,
+            ApplicationEventPublisher publisher
+    ) {
         this.categoriaRepository = categoriaRepository;
+        this.publisher = publisher;
     }
 
     @GetMapping
@@ -32,12 +38,10 @@ public class CategoriaResource {
 
         Categoria categoriaSalva = categoriaRepository.save(categoria);
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
-                .buildAndExpand(categoriaSalva.getCodigo()).toUri();
+        publisher.publishEvent(
+                new RecursoCriadoEvento(this, response, categoriaSalva.getCodigo()));
 
-        response.setHeader("Location", uri.toASCIIString());
-
-        return ResponseEntity.created(uri).body(categoriaSalva);
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
     }
 
     @GetMapping("/{codigo}")
@@ -46,9 +50,4 @@ public class CategoriaResource {
         return result.orElseThrow();
     }
 
-//    @GetMapping
-//    public ResponseEntity<?> listar() {
-//        List<Categoria> categorias = categoriaRepository.findAll();
-//        return !categorias.isEmpty() ? ResponseEntity.ok(categorias) : ResponseEntity.noContent().build();
-//    }
 }
