@@ -47,4 +47,10 @@ public class PessoaResource {
         return result.orElseThrow();
     }
 
+    @DeleteMapping("/{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteOne(@PathVariable Long codigo) {
+        pessoaRepository.deleteById(codigo);
+    }
+
 }
