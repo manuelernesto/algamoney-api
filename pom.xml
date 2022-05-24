@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>io.github.manuelernesto</groupId>
-    <artifactId>money_api</artifactId>
+    <artifactId>algamoney-api</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>money_api</name>
     <description>Learn Rest API with java and spring boot</description>
