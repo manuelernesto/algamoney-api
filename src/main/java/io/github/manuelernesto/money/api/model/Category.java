@@ -11,25 +11,25 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigo;
+    private Long id;
     @NotNull
     @Size(min = 5, max = 50)
-    private String nome;
+    private String name;
 
-    public Long getCodigo() {
-        return codigo;
+    public Long getId() {
+        return id;
     }
 
-    public void setCodigo(Long codigo) {
-        this.codigo = codigo;
+    public void setId(Long codigo) {
+        this.id = codigo;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String nome) {
+        this.name = nome;
     }
 
     @Override
@@ -37,11 +37,11 @@ public class Category {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return Objects.equals(codigo, category.codigo);
+        return Objects.equals(id, category.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(codigo);
+        return Objects.hash(id);
     }
 }

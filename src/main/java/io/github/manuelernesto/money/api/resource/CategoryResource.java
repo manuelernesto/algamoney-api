@@ -39,7 +39,7 @@ public class CategoryResource {
         Category savedCategory = categoryRepository.save(category);
 
         publisher.publishEvent(
-                new RecursoCriadoEvento(this, response, savedCategory.getCodigo()));
+                new RecursoCriadoEvento(this, response, savedCategory.getId()));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCategory);
     }
