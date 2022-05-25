@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/categories")
 public class CategoryResource {
 
     private final CategoryRepository categoryRepository;
