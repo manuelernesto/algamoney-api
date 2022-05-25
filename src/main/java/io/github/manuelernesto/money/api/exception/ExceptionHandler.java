@@ -29,7 +29,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable
             (HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        String userMessage = messageSource.getMessage("mensagem.invalida", null, LocaleContextHolder.getLocale());
+        String userMessage = messageSource.getMessage("message.invalid", null, LocaleContextHolder.getLocale());
         String developerMessage = ex.getCause().toString();
         List<Error> errors = Collections.singletonList(new Error(userMessage, developerMessage));
         return handleExceptionInternal(ex, errors, headers, HttpStatus.BAD_REQUEST, request);
@@ -47,7 +47,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleEmptyResultDataAccessException(
             EmptyResultDataAccessException ex, WebRequest request) {
 
-        String userMessage = messageSource.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
+        String userMessage = messageSource.getMessage("resource.not-found", null, LocaleContextHolder.getLocale());
         String developerMessage = ex.toString();
 
         List<Error> errors = Collections.singletonList(new Error(userMessage, developerMessage));
@@ -66,8 +66,8 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     public static class Error {
-        private String userMessage;
-        private String developerMessage;
+        private final String userMessage;
+        private final String developerMessage;
 
         public Error(String userMessage, String developerMessage) {
             this.userMessage = userMessage;

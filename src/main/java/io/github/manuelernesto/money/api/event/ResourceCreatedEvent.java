@@ -4,17 +4,17 @@ import org.springframework.context.ApplicationEvent;
 
 import javax.servlet.http.HttpServletResponse;
 
-public class RecursoCriadoEvento extends ApplicationEvent {
+public class ResourceCreatedEvent extends ApplicationEvent {
 
-    private HttpServletResponse response;
-    private Long codigo;
+    private final HttpServletResponse response;
+    private final Long id;
 
-    public RecursoCriadoEvento(
+    public ResourceCreatedEvent(
             Object source,
             HttpServletResponse response,
-            Long codigo) {
+            Long id) {
         super(source);
-        this.codigo = codigo;
+        this.id = id;
         this.response = response;
     }
 
@@ -22,7 +22,7 @@ public class RecursoCriadoEvento extends ApplicationEvent {
         return response;
     }
 
-    public Long getCodigo() {
-        return codigo;
+    public Long getId() {
+        return id;
     }
 }

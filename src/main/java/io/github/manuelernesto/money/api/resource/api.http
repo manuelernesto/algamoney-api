@@ -1,0 +1,45 @@
+###
+GET http://localhost:8080/categories
+
+<> 2022-05-25T112754.200.json
+<> 2022-05-25T112731.200.json
+<> 2022-05-25T112622.200.json
+<> 2022-05-25T112458.200.json
+
+###
+POST http://localhost:8080/categories
+Content-Type: application/json
+
+{
+  "name": "Streaming"
+}
+
+<> 2022-05-25T112750.201.json
+
+###
+GET http://localhost:8080/categories/5
+
+
+<> 2022-05-25T145003.500.json
+
+###
+POST http://localhost:8080/people
+Content-Type: application/json
+
+{
+  "name": "Streaming",
+  "active": false,
+  "publicPlace": "publicPlace",
+  "number": "123",
+  "complement": "complement",
+  "cep": "cep",
+  "district": "district",
+  "city": "city",
+  "state": "state"
+
+}
+
+
+###
+GET http://localhost:8080/people
+

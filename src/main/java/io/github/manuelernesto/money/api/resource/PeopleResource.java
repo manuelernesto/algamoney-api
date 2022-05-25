@@ -1,6 +1,6 @@
 package io.github.manuelernesto.money.api.resource;
 
-import io.github.manuelernesto.money.api.event.RecursoCriadoEvento;
+import io.github.manuelernesto.money.api.event.ResourceCreatedEvent;
 import io.github.manuelernesto.money.api.model.People;
 import io.github.manuelernesto.money.api.repository.PeopleRepository;
 import org.springframework.context.ApplicationEventPublisher;
@@ -36,7 +36,7 @@ public class PeopleResource {
         People savedPeople = peopleRepository.save(people);
 
         publisher.publishEvent(
-                new RecursoCriadoEvento(this, response, savedPeople.getId()));
+                new ResourceCreatedEvent(this, response, savedPeople.getId()));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedPeople);
     }
