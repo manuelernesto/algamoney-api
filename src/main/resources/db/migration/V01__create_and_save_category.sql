@@ -10,4 +10,4 @@ values ('Lazer'),
        ('Alimentação'),
        ('Supermercado'),
        ('Farmácia'),
-       ('Outros');
+       ('Others');

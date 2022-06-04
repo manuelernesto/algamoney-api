@@ -3,6 +3,7 @@ package io.github.manuelernesto.money.api.resource;
 import io.github.manuelernesto.money.api.event.ResourceCreatedEvent;
 import io.github.manuelernesto.money.api.model.Category;
 import io.github.manuelernesto.money.api.repository.CategoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,20 +14,13 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/categories")
 public class CategoryResource {
 
     private final CategoryRepository categoryRepository;
     private final ApplicationEventPublisher publisher;
-
-    public CategoryResource(
-            CategoryRepository categoryRepository,
-            ApplicationEventPublisher publisher
-    ) {
-        this.categoryRepository = categoryRepository;
-        this.publisher = publisher;
-    }
 
     @GetMapping
     public List<Category> listAll() {

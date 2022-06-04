@@ -3,6 +3,7 @@ package io.github.manuelernesto.money.api.resource;
 import io.github.manuelernesto.money.api.event.ResourceCreatedEvent;
 import io.github.manuelernesto.money.api.model.People;
 import io.github.manuelernesto.money.api.repository.PeopleRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/people")
 public class PeopleResource {
@@ -20,10 +22,6 @@ public class PeopleResource {
     private final PeopleRepository peopleRepository;
     private final ApplicationEventPublisher publisher;
 
-    public PeopleResource(PeopleRepository peopleRepository, ApplicationEventPublisher publisher) {
-        this.peopleRepository = peopleRepository;
-        this.publisher = publisher;
-    }
 
     @GetMapping
     public List<People> listAll() {
