@@ -5,6 +5,7 @@ import io.github.manuelernesto.money.api.model.Category;
 import io.github.manuelernesto.money.api.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("api/v1/categories")
 public class CategoryResource {
 
     private final CategoryRepository categoryRepository;
@@ -32,16 +33,14 @@ public class CategoryResource {
 
         Category savedCategory = categoryRepository.save(category);
 
-        publisher.publishEvent(
-                new ResourceCreatedEvent(this, response, savedCategory.getId()));
+        publisher.publishEvent(new ResourceCreatedEvent(this, response, savedCategory.getId()));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCategory);
     }
 
     @GetMapping("/{id}")
     public Category findByCode(@PathVariable Long id) {
-        Optional<Category> result = categoryRepository.findById(id);
-        return result.orElseThrow();
+        return categoryRepository.findById(id).orElseThrow();
     }
 
 }

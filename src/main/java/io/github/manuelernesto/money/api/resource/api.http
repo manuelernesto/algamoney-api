@@ -1,8 +1,8 @@
 ###
-GET http://localhost:8080/categories
+GET {{host}}/api/v1/categories
 
 ###
-POST http://localhost:8080/categories
+POST {{host}}/api/v1/categories
 Content-Type: application/json
 
 {
@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8080/categories/5
+GET {{host}}/api/v1/categories/5
 
 ###
 POST http://localhost:8080/people

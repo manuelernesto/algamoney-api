@@ -1,5 +1,7 @@
 package io.github.manuelernesto.money.api.exception;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,14 +19,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.*;
 
+@AllArgsConstructor
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
     private final MessageSource messageSource;
-
-    public ExceptionHandler(MessageSource messageSource) {
-        this.messageSource = messageSource;
-    }
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable
@@ -39,7 +38,6 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<Error> errors = createErrorList(ex.getBindingResult());
         return handleExceptionInternal(ex, errors, headers, HttpStatus.BAD_REQUEST, request);
-
     }
 
 
@@ -65,21 +63,10 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
         return errors;
     }
 
+    @Getter
+    @AllArgsConstructor
     public static class Error {
         private final String userMessage;
         private final String developerMessage;
-
-        public Error(String userMessage, String developerMessage) {
-            this.userMessage = userMessage;
-            this.developerMessage = developerMessage;
-        }
-
-        public String getUserMessage() {
-            return userMessage;
-        }
-
-        public String getDeveloperMessage() {
-            return developerMessage;
-        }
     }
 }
