@@ -77,3 +77,10 @@ GET {{host}}/api/v1/person/
 
 ### DELETE PERSON
 DELETE {{host}}/api/v1/person/100
+
+
+### GET LAUNCH BY ID
+GET {{host}}/api/v1/launches/1
+
+### GET ALL LAUNCHES
+GET {{host}}/api/v1/launches
