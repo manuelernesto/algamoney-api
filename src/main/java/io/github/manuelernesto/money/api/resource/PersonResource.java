@@ -21,7 +21,6 @@ import java.util.List;
 public class PersonResource {
 
     private final PersonRepository personRepository;
-
     private final PersonService personService;
     private final ApplicationEventPublisher publisher;
 
