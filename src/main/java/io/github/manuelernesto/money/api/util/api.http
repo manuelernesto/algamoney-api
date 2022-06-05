@@ -1,0 +1,36 @@
+###
+GET {{host}}/api/v1/categories
+
+###
+POST {{host}}/api/v1/categories
+Content-Type: application/json
+
+{
+  "name": null
+}
+
+###
+GET {{host}}/api/v1/categories/5
+
+###
+POST {{host}}/api/v1/person
+Content-Type: application/json
+
+{
+  "name": "Streaming",
+  "active": false,
+  "address": {
+    "number": "123",
+    "complement": "complement",
+    "cep": "cep",
+    "district": "district",
+    "city": "city",
+    "state": "state",
+    "public_place": "state"
+  }
+}
+
+
+###
+GET {{host}}/api/v1/person/4
+

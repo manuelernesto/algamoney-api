@@ -1,8 +1,8 @@
 package io.github.manuelernesto.money.api.resource;
 
 import io.github.manuelernesto.money.api.event.ResourceCreatedEvent;
-import io.github.manuelernesto.money.api.model.People;
-import io.github.manuelernesto.money.api.repository.PeopleRepository;
+import io.github.manuelernesto.money.api.model.Person;
+import io.github.manuelernesto.money.api.repository.PersonRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -16,39 +16,39 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/people")
-public class PeopleResource {
+@RequestMapping("/api/v1/person")
+public class PersonResource {
 
-    private final PeopleRepository peopleRepository;
+    private final PersonRepository personRepository;
     private final ApplicationEventPublisher publisher;
 
 
     @GetMapping
-    public List<People> listAll() {
-        return peopleRepository.findAll();
+    public List<Person> listAll() {
+        return personRepository.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<People> save(@Valid @RequestBody People people, HttpServletResponse response) {
+    public ResponseEntity<Person> save(@RequestBody Person person, HttpServletResponse response) {
 
-        People savedPeople = peopleRepository.save(people);
+        Person savedPerson = personRepository.save(person);
 
         publisher.publishEvent(
-                new ResourceCreatedEvent(this, response, savedPeople.getId()));
+                new ResourceCreatedEvent(this, response, savedPerson.getId()));
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedPeople);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedPerson);
     }
 
     @GetMapping("/{id}")
-    public People findById(@PathVariable Long id) {
-        Optional<People> result = peopleRepository.findById(id);
+    public Person findById(@PathVariable Long id) {
+        Optional<Person> result = personRepository.findById(id);
         return result.orElseThrow();
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteOne(@PathVariable Long id) {
-        peopleRepository.deleteById(id);
+        personRepository.deleteById(id);
     }
 
 }

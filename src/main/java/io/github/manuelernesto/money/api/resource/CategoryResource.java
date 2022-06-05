@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/v1/categories")
+@RequestMapping("/api/v1/categories")
 public class CategoryResource {
 
     private final CategoryRepository categoryRepository;
