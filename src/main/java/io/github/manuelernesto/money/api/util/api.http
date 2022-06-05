@@ -30,6 +30,24 @@ Content-Type: application/json
   }
 }
 
+### UPDATE PERSON
+PUT {{host}}/api/v1/person/40
+Content-Type: application/json
+
+{
+  "name": "Streaming 4",
+  "active": false,
+  "address": {
+    "number": "123",
+    "complement": "complement",
+    "cep": "cep",
+    "district": "district",
+    "city": "city",
+    "state": "state",
+    "public_place": "state"
+  }
+}
+
 
 ### GET PERSON BY ID
 GET {{host}}/api/v1/person/4
@@ -38,4 +56,4 @@ GET {{host}}/api/v1/person/4
 GET {{host}}/api/v1/person/
 
 ### DELETE PERSON
-DELETE {{host}}/api/v1/person/1
+DELETE {{host}}/api/v1/person/100

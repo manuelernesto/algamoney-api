@@ -3,6 +3,7 @@ package io.github.manuelernesto.money.api.resource;
 import io.github.manuelernesto.money.api.event.ResourceCreatedEvent;
 import io.github.manuelernesto.money.api.model.Person;
 import io.github.manuelernesto.money.api.repository.PersonRepository;
+import io.github.manuelernesto.money.api.service.PersonService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
@@ -20,6 +20,8 @@ import java.util.Optional;
 public class PersonResource {
 
     private final PersonRepository personRepository;
+
+    private final PersonService personService;
     private final ApplicationEventPublisher publisher;
 
 
@@ -41,14 +43,18 @@ public class PersonResource {
 
     @GetMapping("/{id}")
     public Person findById(@PathVariable Long id) {
-        Optional<Person> result = personRepository.findById(id);
-        return result.orElseThrow();
+        return personRepository.findById(id).orElseThrow();
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteOne(@PathVariable Long id) {
         personRepository.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Person> updatePerson(@PathVariable Long id, @Valid @RequestBody Person person) {
+        return ResponseEntity.ok(personService.updatePerson(id, person));
     }
 
 }
