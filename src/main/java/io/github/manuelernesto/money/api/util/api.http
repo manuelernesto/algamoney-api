@@ -1,18 +1,18 @@
-###
+### GET ALL CATEGORIES
 GET {{host}}/api/v1/categories
 
-###
+### SAVE CATEGORY
 POST {{host}}/api/v1/categories
 Content-Type: application/json
 
 {
-  "name": null
+  "name": "Workout"
 }
 
-###
+### GET CATEGORY BY ID
 GET {{host}}/api/v1/categories/5
 
-###
+### SAVE PERSON
 POST {{host}}/api/v1/person
 Content-Type: application/json
 
@@ -31,6 +31,11 @@ Content-Type: application/json
 }
 
 
-###
+### GET PERSON BY ID
 GET {{host}}/api/v1/person/4
 
+### GET ALL PEOPLE
+GET {{host}}/api/v1/person/
+
+### DELETE PERSON
+DELETE {{host}}/api/v1/person/1
