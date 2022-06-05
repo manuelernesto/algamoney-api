@@ -1,5 +1,6 @@
 package io.github.manuelernesto.money.api.service;
 
+import io.github.manuelernesto.money.api.model.Address;
 import io.github.manuelernesto.money.api.model.Person;
 import io.github.manuelernesto.money.api.repository.PersonRepository;
 import lombok.AllArgsConstructor;
@@ -18,8 +19,25 @@ public class PersonService {
     private final PersonRepository personRepository;
 
     public Person updatePerson(Long id, Person person) {
-        var personToUpdate = personRepository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
+        Person personToUpdate = findPersonByID(id);
         BeanUtils.copyProperties(person, personToUpdate, "id");
         return personRepository.save(personToUpdate);
+    }
+
+
+    public void updateStatus(Long id, Boolean active) {
+        Person personToUpdate = findPersonByID(id);
+        personToUpdate.setActive(active);
+        personRepository.save(personToUpdate);
+    }
+
+    public void updateAddress(Long id, Address address) {
+        Person personToUpdate = findPersonByID(id);
+        personToUpdate.setAddress(address);
+        personRepository.save(personToUpdate);
+    }
+
+    private Person findPersonByID(Long id) {
+        return personRepository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
     }
 }

@@ -1,6 +1,7 @@
 package io.github.manuelernesto.money.api.resource;
 
 import io.github.manuelernesto.money.api.event.ResourceCreatedEvent;
+import io.github.manuelernesto.money.api.model.Address;
 import io.github.manuelernesto.money.api.model.Person;
 import io.github.manuelernesto.money.api.repository.PersonRepository;
 import io.github.manuelernesto.money.api.service.PersonService;
@@ -55,6 +56,18 @@ public class PersonResource {
     @PutMapping("/{id}")
     public ResponseEntity<Person> updatePerson(@PathVariable Long id, @Valid @RequestBody Person person) {
         return ResponseEntity.ok(personService.updatePerson(id, person));
+    }
+
+    @PutMapping("/{id}/active")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void UpdateStatus(@PathVariable Long id, @RequestBody Boolean active) {
+        personService.updateStatus(id, active);
+    }
+
+    @PutMapping("/{id}/address")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void UpdateAddress(@PathVariable Long id, @RequestBody Address address) {
+        personService.updateAddress(id, address);
     }
 
 }

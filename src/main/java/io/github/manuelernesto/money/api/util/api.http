@@ -31,13 +31,34 @@ Content-Type: application/json
 }
 
 ### UPDATE PERSON
-PUT {{host}}/api/v1/person/40
+PUT {{host}}/api/v1/person/5
 Content-Type: application/json
 
 {
-  "name": "Streaming 4",
-  "active": false,
+  "name": "Manuel Ernesto",
+  "active": true,
   "address": {
+    "number": "S/N",
+    "complement": "Junto ao paparoka",
+    "cep": "S/C",
+    "district": "Mainga",
+    "city": "Luanda",
+    "state": "Luanda",
+    "public_place": "Luanda"
+  }
+}
+
+### UPDATE PERSON STATUS
+PUT {{host}}/api/v1/person/5/active
+Content-Type: application/json
+
+true
+
+### UPDATE PERSON Address
+PUT {{host}}/api/v1/person/5/address
+Content-Type: application/json
+
+{
     "number": "123",
     "complement": "complement",
     "cep": "cep",
@@ -46,11 +67,10 @@ Content-Type: application/json
     "state": "state",
     "public_place": "state"
   }
-}
 
 
 ### GET PERSON BY ID
-GET {{host}}/api/v1/person/4
+GET {{host}}/api/v1/person/5
 
 ### GET ALL PEOPLE
 GET {{host}}/api/v1/person/
