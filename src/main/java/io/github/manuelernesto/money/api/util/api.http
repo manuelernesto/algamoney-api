@@ -83,7 +83,7 @@ DELETE {{host}}/api/v1/person/100
 GET {{host}}/api/v1/launches/24
 
 ### GET ALL LAUNCHES
-GET {{host}}/api/v1/launches
+GET {{host}}/api/v1/launches?size=2&page=1
 
 ### GET ALL LAUNCHES WITH FILTERS
 GET {{host}}/api/v1/launches?dueDateFrom=2022-06-10&dueDateTo=2022-06-11

@@ -8,6 +8,8 @@ import io.github.manuelernesto.money.api.repository.filter.LaunchFilter;
 import io.github.manuelernesto.money.api.service.LaunchService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +33,8 @@ public class LaunchResource {
     private final ApplicationEventPublisher publisher;
 
     @GetMapping
-    public List<Launch> search(LaunchFilter launchFiltered) {
-        return launchRepository.filter(launchFiltered);
+    public Page<Launch> search(LaunchFilter launchFiltered, Pageable pageable) {
+        return launchRepository.filter(launchFiltered,pageable);
     }
 
     @PostMapping
