@@ -4,6 +4,7 @@ import io.github.manuelernesto.money.api.event.ResourceCreatedEvent;
 import io.github.manuelernesto.money.api.model.Category;
 import io.github.manuelernesto.money.api.model.Launch;
 import io.github.manuelernesto.money.api.repository.LaunchRepository;
+import io.github.manuelernesto.money.api.repository.filter.LaunchFilter;
 import io.github.manuelernesto.money.api.service.LaunchService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -29,6 +30,11 @@ public class LaunchResource {
     private final LaunchService launchService;
     private final ApplicationEventPublisher publisher;
 
+    @GetMapping
+    public List<Launch> search(LaunchFilter launchFiltered) {
+        return launchRepository.filter(launchFiltered);
+    }
+
     @PostMapping
     public ResponseEntity<Launch> save(@Valid @RequestBody Launch launch, HttpServletResponse response) {
 
@@ -37,11 +43,6 @@ public class LaunchResource {
         publisher.publishEvent(new ResourceCreatedEvent(this, response, launchSaved.getId()));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(launchSaved);
-    }
-
-    @GetMapping
-    public List<Launch> getAll() {
-        return launchRepository.findAll();
     }
 
     @GetMapping("/{id}")

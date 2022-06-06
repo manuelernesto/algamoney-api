@@ -1,6 +1,7 @@
 package io.github.manuelernesto.money.api.repository;
 
 import io.github.manuelernesto.money.api.model.Launch;
+import io.github.manuelernesto.money.api.repository.launch.LaunchRepositoryQuery;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +11,6 @@ import org.springframework.stereotype.Repository;
  * @date 05/06/22 4:12 PM
  */
 @Repository
-public interface LaunchRepository extends JpaRepository<Launch, Long> {
+public interface LaunchRepository extends JpaRepository<Launch, Long>, LaunchRepositoryQuery {
+
 }

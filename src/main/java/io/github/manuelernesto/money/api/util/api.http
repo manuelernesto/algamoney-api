@@ -85,6 +85,9 @@ GET {{host}}/api/v1/launches/22
 ### GET ALL LAUNCHES
 GET {{host}}/api/v1/launches
 
+### GET ALL LAUNCHES WITH FILTERS
+GET {{host}}/api/v1/launches?dueDateFrom=2022-06-10&dueDateTo=2022-06-11
+
 ### SAVE LAUNCH
 POST {{host}}/api/v1/launches
 Content-Type: application/json
