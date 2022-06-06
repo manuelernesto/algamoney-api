@@ -6,6 +6,7 @@ import io.github.manuelernesto.money.api.repository.LaunchRepository;
 import io.github.manuelernesto.money.api.repository.PersonRepository;
 import io.github.manuelernesto.money.api.service.exception.PersonNotFoundOrInactiveException;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class LaunchService {
     private final LaunchRepository launchRepository;
-    private final CategoryRepository categoryRepository;
     private final PersonRepository personRepository;
 
     public Launch save(Launch launch) {
@@ -26,5 +26,14 @@ public class LaunchService {
             throw new PersonNotFoundOrInactiveException();
 
         return launchRepository.save(launch);
+    }
+
+    public void delete(Long id) {
+        launchRepository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
+        launchRepository.deleteById(id);
+    }
+
+    public Launch findById(Long id) {
+        return launchRepository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
     }
 }

@@ -47,6 +47,12 @@ public class LaunchResource {
 
     @GetMapping("/{id}")
     public Launch getById(@PathVariable Long id) {
-        return launchRepository.findById(id).orElseThrow();
+        return launchService.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteLaunch(@PathVariable Long id){
+        launchService.delete(id);
     }
 }

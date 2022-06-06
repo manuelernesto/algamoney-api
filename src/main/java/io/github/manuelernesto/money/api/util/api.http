@@ -80,7 +80,7 @@ DELETE {{host}}/api/v1/person/100
 
 
 ### GET LAUNCH BY ID
-GET {{host}}/api/v1/launches/22
+GET {{host}}/api/v1/launches/24
 
 ### GET ALL LAUNCHES
 GET {{host}}/api/v1/launches
@@ -105,3 +105,6 @@ Content-Type: application/json
     "id": 5
   }
 }
+
+### DELETE LAUNCH BY ID
+DELETE {{host}}/api/v1/launches/24
