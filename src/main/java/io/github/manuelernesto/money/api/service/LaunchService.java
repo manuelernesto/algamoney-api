@@ -1,7 +1,10 @@
 package io.github.manuelernesto.money.api.service;
 
 import io.github.manuelernesto.money.api.model.Launch;
+import io.github.manuelernesto.money.api.repository.CategoryRepository;
 import io.github.manuelernesto.money.api.repository.LaunchRepository;
+import io.github.manuelernesto.money.api.repository.PersonRepository;
+import io.github.manuelernesto.money.api.service.exception.PersonNotFoundOrInactiveException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +17,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class LaunchService {
     private final LaunchRepository launchRepository;
+    private final CategoryRepository categoryRepository;
+    private final PersonRepository personRepository;
 
     public Launch save(Launch launch) {
+        var person = personRepository.findById(launch.getPerson().getId()).orElseThrow(PersonNotFoundOrInactiveException::new);
+        if (!person.getActive())
+            throw new PersonNotFoundOrInactiveException();
+
         return launchRepository.save(launch);
     }
 }

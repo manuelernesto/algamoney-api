@@ -80,7 +80,7 @@ DELETE {{host}}/api/v1/person/100
 
 
 ### GET LAUNCH BY ID
-GET {{host}}/api/v1/launches/16
+GET {{host}}/api/v1/launches/22
 
 ### GET ALL LAUNCHES
 GET {{host}}/api/v1/launches
@@ -90,15 +90,15 @@ POST {{host}}/api/v1/launches
 Content-Type: application/json
 
 {
-  "description": "IPO BAI",
+  "description": "IPO ATL",
   "observation": "Distribuição de lucros",
-  "amount": 6500.00,
-  "dueDate": "2022-06-10",
+  "amount": 195000.00,
+  "dueDate": "2022-06-12",
   "type": "REVENUE",
   "category": {
     "id": 1
   },
   "person": {
-    "id": 2
+    "id": 5
   }
 }

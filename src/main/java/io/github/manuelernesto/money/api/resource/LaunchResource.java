@@ -4,6 +4,7 @@ import io.github.manuelernesto.money.api.event.ResourceCreatedEvent;
 import io.github.manuelernesto.money.api.model.Category;
 import io.github.manuelernesto.money.api.model.Launch;
 import io.github.manuelernesto.money.api.repository.LaunchRepository;
+import io.github.manuelernesto.money.api.service.LaunchService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -25,12 +26,13 @@ import java.util.List;
 public class LaunchResource {
 
     private final LaunchRepository launchRepository;
+    private final LaunchService launchService;
     private final ApplicationEventPublisher publisher;
 
     @PostMapping
     public ResponseEntity<Launch> save(@Valid @RequestBody Launch launch, HttpServletResponse response) {
 
-        Launch launchSaved = launchRepository.save(launch);
+        Launch launchSaved = launchService.save(launch);
 
         publisher.publishEvent(new ResourceCreatedEvent(this, response, launchSaved.getId()));
 
