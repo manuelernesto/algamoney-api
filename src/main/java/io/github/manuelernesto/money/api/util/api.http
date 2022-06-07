@@ -1,5 +1,7 @@
 ### GET ALL CATEGORIES
 GET {{host}}/api/v1/categories
+Content-Type: application/json
+Authorization: Basic "admin" "admin"
 
 ### SAVE CATEGORY
 POST {{host}}/api/v1/categories
