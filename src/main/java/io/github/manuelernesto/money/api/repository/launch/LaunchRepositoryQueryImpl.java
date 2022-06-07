@@ -46,16 +46,16 @@ public class LaunchRepositoryQueryImpl implements LaunchRepositoryQuery {
     private Predicate[] createRestrictions(LaunchFilter filter, CriteriaBuilder builder, Root<Launch> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (!StringUtils.isEmpty(filter.getDescription())) {
-            var description = builder.like(builder.lower(root.get("description")), "%" + filter.getDescription() + "%");
+        if (!StringUtils.isEmpty(filter.description())) {
+            var description = builder.like(builder.lower(root.get("description")), "%" + filter.description() + "%");
             predicates.add(description);
         }
-        if (filter.getDueDateFrom() != null) {
-            var dueDate = builder.greaterThanOrEqualTo(root.get("dueDate"), filter.getDueDateFrom());
+        if (filter.dueDateFrom() != null) {
+            var dueDate = builder.greaterThanOrEqualTo(root.get("dueDate"), filter.dueDateFrom());
             predicates.add(dueDate);
         }
-        if (filter.getDueDateTo() != null) {
-            var dueDate = builder.lessThanOrEqualTo(root.get("dueDate"), filter.getDueDateTo());
+        if (filter.dueDateTo() != null) {
+            var dueDate = builder.lessThanOrEqualTo(root.get("dueDate"), filter.dueDateTo());
             predicates.add(dueDate);
         }
 

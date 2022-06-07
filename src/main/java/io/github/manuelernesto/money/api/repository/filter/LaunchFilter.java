@@ -11,14 +11,7 @@ import java.time.LocalDate;
  * @version 1.0
  * @date 06/06/22 9:13 PM
  */
-@Getter
-@Setter
-public class LaunchFilter {
-    private String description;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dueDateFrom;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dueDateTo;
+public record LaunchFilter(String description, @DateTimeFormat(pattern = "yyyy-MM-dd")
+LocalDate dueDateFrom, @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dueDateTo) {
 }

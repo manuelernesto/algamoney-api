@@ -14,9 +14,7 @@ import org.springframework.stereotype.Service;
  * @date 05/06/22 1:10 PM
  */
 @Service
-@AllArgsConstructor
-public class PersonService {
-    private final PersonRepository personRepository;
+public record PersonService(PersonRepository personRepository) {
 
     public Person updatePerson(Long id, Person person) {
         Person personToUpdate = findPersonByID(id);

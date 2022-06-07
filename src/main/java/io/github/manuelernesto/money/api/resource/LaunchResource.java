@@ -1,12 +1,10 @@
 package io.github.manuelernesto.money.api.resource;
 
 import io.github.manuelernesto.money.api.event.ResourceCreatedEvent;
-import io.github.manuelernesto.money.api.model.Category;
 import io.github.manuelernesto.money.api.model.Launch;
 import io.github.manuelernesto.money.api.repository.LaunchRepository;
 import io.github.manuelernesto.money.api.repository.filter.LaunchFilter;
 import io.github.manuelernesto.money.api.service.LaunchService;
-import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,25 +14,20 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * @author Manuel Ernesto (manuelernest0)
  * @version 1.0
  * @date 05/06/22 4:16 PM
  */
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/launches")
-public class LaunchResource {
-
-    private final LaunchRepository launchRepository;
-    private final LaunchService launchService;
-    private final ApplicationEventPublisher publisher;
+public record LaunchResource(LaunchRepository launchRepository, LaunchService launchService,
+                             ApplicationEventPublisher publisher) {
 
     @GetMapping
     public Page<Launch> search(LaunchFilter launchFiltered, Pageable pageable) {
-        return launchRepository.filter(launchFiltered,pageable);
+        return launchRepository.filter(launchFiltered, pageable);
     }
 
     @PostMapping
@@ -54,7 +47,7 @@ public class LaunchResource {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteLaunch(@PathVariable Long id){
+    public void deleteLaunch(@PathVariable Long id) {
         launchService.delete(id);
     }
 }

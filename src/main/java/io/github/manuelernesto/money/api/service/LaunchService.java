@@ -14,12 +14,9 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  * @date 06/06/22 1:35 AM
  */
-@AllArgsConstructor
-@Service
-public class LaunchService {
-    private final LaunchRepository launchRepository;
-    private final PersonRepository personRepository;
 
+@Service
+public record LaunchService(LaunchRepository launchRepository, PersonRepository personRepository) {
     public Launch save(Launch launch) {
         var person = personRepository.findById(launch.getPerson().getId()).orElseThrow(PersonNotFoundOrInactiveException::new);
         if (!person.getActive())

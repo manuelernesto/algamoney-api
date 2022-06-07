@@ -15,13 +15,10 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
+
 @RestController
 @RequestMapping("/api/v1/categories")
-public class CategoryResource {
-
-    private final CategoryRepository categoryRepository;
-    private final ApplicationEventPublisher publisher;
+public record CategoryResource(CategoryRepository categoryRepository, ApplicationEventPublisher publisher) {
 
     @GetMapping
     public List<Category> listAll() {

@@ -80,7 +80,7 @@ DELETE {{host}}/api/v1/person/100
 
 
 ### GET LAUNCH BY ID
-GET {{host}}/api/v1/launches/24
+GET {{host}}/api/v1/launches/10
 
 ### GET ALL LAUNCHES
 GET {{host}}/api/v1/launches?size=2&page=1

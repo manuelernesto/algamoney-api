@@ -15,14 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
-@AllArgsConstructor
+
 @RestController
 @RequestMapping("/api/v1/person")
-public class PersonResource {
-
-    private final PersonRepository personRepository;
-    private final PersonService personService;
-    private final ApplicationEventPublisher publisher;
+public record PersonResource(
+        PersonRepository personRepository,
+        PersonService personService,
+        ApplicationEventPublisher publisher
+) {
 
 
     @GetMapping
